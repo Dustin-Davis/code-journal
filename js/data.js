@@ -7,7 +7,7 @@ var data = {
   nextEntryId: 1
 };
 
-window.addEventListener('submit', function (event) {
+window.addEventListener('beforeunload', function (event) {
   data.nextEntryId++;
   var savedData = JSON.stringify(data);
   localStorage.setItem('entry', savedData);
