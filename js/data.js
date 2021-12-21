@@ -7,8 +7,12 @@ var data = {
   nextEntryId: 1
 };
 
+var previousEntriesJSON = localStorage.getItem('entries');
+if (previousEntriesJSON !== null) {
+  previousEntriesJSON = JSON.parse(data);
+}
+
 window.addEventListener('beforeunload', function (event) {
-  data.nextEntryId++;
   var savedData = JSON.stringify(data);
-  localStorage.setItem('entry', savedData);
+  localStorage.setItem('Entries', savedData);
 });
