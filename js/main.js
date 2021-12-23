@@ -3,6 +3,8 @@
 
 var $photo = document.querySelector('.photoUrl');
 var $image = document.querySelector('.img');
+var $entryForm = document.getElementById('entry-form');
+var $divEntries = document.getElementById('div-entries');
 
 $photo.addEventListener('input', function (event) {
   $image.setAttribute('src', event.target.value);
@@ -57,6 +59,41 @@ function renderEntries(newEntry) {
 
 var ul = document.querySelector('.entries-list');
 
-for (var i = 0; i < data.entries.length - 1; i++) {
-  ul.appendChild(renderEntries(data.entries[i]));
+function loaded(event) {
+  for (var i = data.entries.length - 1; i >= 0; i--) {
+    ul.prepend(renderEntries(data.entries[i]));
+  }
+
+  if (data.view === 'entries') {
+    $entryForm.classList.remove('hidden');
+    $divEntries.classList.add('hidden');
+  } else if (data.view === 'entry-form') {
+    $entryForm.classList.add('hidden');
+    $divEntries.classList.remove('hidden');
+  }
 }
+
+window.addEventListener('DOMContentLoaded', loaded);
+
+var $entriesLink = document.getElementById('entries-link');
+var $nodeList = document.querySelectorAll('.view');
+var $entriesButton = document.getElementById('entries-button');
+
+function viewSwap(event) {
+  if (!event.target.matches('.link')) {
+    return;
+  }
+
+  var TdataView = event.target.getAttribute('data-view');
+
+  for (var viewNode of $nodeList) {
+    if (viewNode.getAttribute('data-view') === TdataView) {
+      viewNode.classList.remove('hidden');
+    } else {
+      viewNode.classList.add('hidden');
+    }
+  }
+}
+
+$entriesLink.addEventListener('click', viewSwap);
+$entriesButton.addEventListener('click', viewSwap);

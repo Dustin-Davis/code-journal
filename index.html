@@ -18,18 +18,21 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="column-full">
-          <h2>Code Journal</h2>
+        <div class="column-full align">
+          <h1>Code Journal</h1>
+          <nav>
+            <a href="#" class="link" id="entries-link" data-view="entries">Entries</a>
+          </nav>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <form method="get" class="form" data-view="entry-form">
+    <form method="get" class="form view" id="entry-form" data-view="entry-form">
       <div class="container">
         <div class="row">
           <div class="column-full">
-            <h1>New Entry</h1>
+            <h2 class="text-size">New Entry</h2>
           </div>
           <div class="column-half" >
             <img src="images/placeholder-image-square.jpg" alt="placeholder-image-square" class="img">
@@ -52,7 +55,13 @@
         </div>
       </div>
     </form>
-    <div data-view="entries" class="container">
+    <div data-view="entries" id="div-entries" class="container view hidden">
+      <div class="row">
+        <div class="column-full align-new">
+          <h2 class="text-size">Entries</h2>
+          <button type="button" class="link button" id="entries-button" data-view="entry-form">NEW</button>
+        </div>
+      </div>
       <ul class="column-full entries-list">
       </ul>
     </div>
