@@ -8,7 +8,8 @@ var data = {
 };
 
 var $nodeList = document.querySelectorAll('.view');
-var previousEntriesJSON = localStorage.getItem('entries');
+
+var previousEntriesJSON = localStorage.getItem('data-storage');
 if (previousEntriesJSON !== null) {
   data = JSON.parse(previousEntriesJSON);
 }
@@ -20,7 +21,7 @@ function beforeunloadContent(event) {
     }
   }
   var savedData = JSON.stringify(data);
-  localStorage.setItem('entries', savedData);
+  localStorage.setItem('data-storage', savedData);
 }
 
 window.addEventListener('beforeunload', beforeunloadContent);
