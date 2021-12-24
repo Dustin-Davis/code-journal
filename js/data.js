@@ -7,12 +7,21 @@ var data = {
   nextEntryId: 1
 };
 
-var previousEntriesJSON = localStorage.getItem('entries');
+var $nodeList = document.querySelectorAll('.view');
+
+var previousEntriesJSON = localStorage.getItem('data-storage');
 if (previousEntriesJSON !== null) {
-  previousEntriesJSON = JSON.parse(data);
+  data = JSON.parse(previousEntriesJSON);
 }
 
-window.addEventListener('beforeunload', function (event) {
+function beforeunloadContent(event) {
+  for (var viewNode of $nodeList) {
+    if (!viewNode.classList.contains('hidden')) {
+      data.view = viewNode.getAttribute('data-view');
+    }
+  }
   var savedData = JSON.stringify(data);
-  localStorage.setItem('entries', savedData);
-});
+  localStorage.setItem('data-storage', savedData);
+}
+
+window.addEventListener('beforeunload', beforeunloadContent);

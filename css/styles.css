@@ -41,3 +41,25 @@ header {
 .title {
   margin-bottom: 0;
 }
+
+.align {
+  align-items: baseline;
+  display: flex;
+}
+
+#entries-link {
+  color: inherit;
+  padding-left: 1.5rem;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+
+.align-new {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-size {
+  font-size: 2rem;
+}
