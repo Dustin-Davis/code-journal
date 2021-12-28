@@ -53,6 +53,10 @@ function renderEntries(newEntry) {
   h2Title.textContent = newEntry.title;
   divText.appendChild(h2Title);
 
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fas fa-pen');
+  h2Title.appendChild(editIcon);
+
   var pText = document.createElement('p');
   pText.setAttribute('class', '');
   pText.textContent = newEntry.notes;

@@ -63,3 +63,8 @@ header {
 .text-size {
   font-size: 2rem;
 }
+
+i {
+  float: right;
+  color: rgb(95, 32, 95);
+}
