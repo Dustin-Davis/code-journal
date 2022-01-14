@@ -5,7 +5,7 @@ var $image = document.querySelector('.img');
 var $entryForm = document.getElementById('entry-form');
 var $entryPage = document.getElementById('entry-page');
 var $noEntriesText = document.querySelector('#no-entries');
-var $ul = document.querySelector('.entries-list');
+var $ul = document.querySelector('ul');
 var $nodeList = document.querySelectorAll('.view');
 
 function updateImg(event) {
@@ -120,9 +120,9 @@ function handleEdit(event) {
     data.editing = dataEntryIdNum;
     for (var i = 0; i < data.entries.length; i++) {
       if (data.editing === data.entries[i].entryId) {
-        $entryForm.elements.title.value = data.entries[i].title;
+        $entryForm.elements.Title.value = data.entries[i].title;
         $entryForm.elements.photoUrl.value = data.entries[i].photoUrl;
-        $entryForm.elements.notes.value = data.entries[i].notes;
+        $entryForm.elements.Notes.value = data.entries[i].notes;
         updateImg();
       }
     }
