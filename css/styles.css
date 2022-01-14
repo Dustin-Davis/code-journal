@@ -64,7 +64,8 @@ header {
   font-size: 2rem;
 }
 
-i {
+.edit-icon {
   float: right;
   color: rgb(95, 32, 95);
+  text-decoration: none;
 }

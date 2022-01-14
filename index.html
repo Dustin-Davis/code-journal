@@ -32,7 +32,7 @@
       <div class="container">
         <div class="row">
           <div class="column-full">
-            <h2 class="text-size">New Entry</h2>
+            <h2 class="text-size" id="entry-page">New Entry</h2>
           </div>
           <div class="column-half" >
             <img src="images/placeholder-image-square.jpg" alt="placeholder-image-square" class="img">
@@ -55,15 +55,19 @@
         </div>
       </div>
     </form>
-    <div data-view="entries" id="div-entries" class="container view hidden">
-      <div class="row">
-        <div class="column-full align-new">
-          <h2 class="text-size">Entries</h2>
-          <button type="button" class="link button" id="entries-button" data-view="entry-form">NEW</button>
+    <div data-view="entries" id="div-entries" class=" view hidden">
+      <div class="container">
+        <div class="row">
+          <div class="column-full align-new">
+            <h2 class="text-size">Entries</h2>
+            <button type="button" class="link button" id="entries-button" data-view="entry-form">NEW</button>
+          </div>
+        </div>
+        <ul class="column-full entries-list"></ul>
+        <div id="no-entries" class="column-full no-entries">
+          <p>No entries have been recored</p>
         </div>
       </div>
-      <ul class="column-full entries-list">
-      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>
