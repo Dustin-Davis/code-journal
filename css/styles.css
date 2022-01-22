@@ -63,3 +63,9 @@ header {
 .text-size {
   font-size: 2rem;
 }
+
+.edit-icon {
+  float: right;
+  color: rgb(95, 32, 95);
+  text-decoration: none;
+}
