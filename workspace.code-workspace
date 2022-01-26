@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\rc1121-code-solutions"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "code-journal",
+		"liveServer.settings.port": 5501
+	}
+}
