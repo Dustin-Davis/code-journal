@@ -7,6 +7,11 @@ var $entryPage = document.getElementById('entry-page');
 var $noEntriesText = document.querySelector('#no-entries');
 var $ul = document.querySelector('ul');
 var $nodeList = document.querySelectorAll('.view');
+var $delete = document.querySelector('.delete-button');
+var $saveRow = document.querySelector('#save-row');
+var $modal = document.querySelector('#modal');
+var $cancel = document.querySelector('.cancel-button');
+var $confirm = document.querySelector('.confirm-button');
 
 function updateImg(event) {
   $image.setAttribute('src', $photo.value);
@@ -74,6 +79,7 @@ function renderEntries(entry) {
   editIcon.setAttribute('class', 'fas fa-pen edit-icon');
   editIcon.setAttribute('href', '#');
   editIcon.setAttribute('data-entry-id', entry.entryId);
+  editIcon.setAttribute('data-view', 'entry-form');
   h2Title.appendChild(editIcon);
 
   var pText = document.createElement('p');
@@ -96,6 +102,9 @@ function appendDom(entry) {
 }
 function swapView(string) {
   data.view = string;
+  if (string === 'entries') {
+    data.editing = null;
+  }
   for (var i = 0; i < $nodeList.length; i++) {
     if ($nodeList[i].getAttribute('data-view') === string) {
       $nodeList[i].className = 'view';
@@ -110,12 +119,11 @@ function dataView(event) {
   if (dataViewValue === null) {
     return;
   }
-  swapView(dataViewValue);
-}
-function handleEdit(event) {
-  if (event.target.matches('.edit-icon')) {
-    swapView('entry-form');
+  var entry = event.target.closest('[data-entry-id]');
+  if (entry !== null) {
     $entryPage.textContent = 'Edit Entry';
+    $delete.className = 'delete-button';
+    $saveRow.className = 'column-full row space-between';
     var dataEntryIdNum = parseInt(event.target.getAttribute('data-entry-id'));
     data.editing = dataEntryIdNum;
     for (var i = 0; i < data.entries.length; i++) {
@@ -126,10 +134,48 @@ function handleEdit(event) {
         updateImg();
       }
     }
+  } else if (dataViewValue === 'entry-form') {
+    $entryForm.reset();
+    $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $entryPage.textContent = 'New Entry';
+    $delete.className = 'hidden';
+    $saveRow.className = 'column-full row';
+  }
+  swapView(dataViewValue);
+}
+
+function handleDelete(event) {
+  if (event.target === $delete) {
+    $modal.className = 'row modal-on';
+  }
+  if (event.target === $cancel) {
+    $modal.className = 'row hidden';
   }
 }
 
-$ul.addEventListener('click', handleEdit);
+function handleModalButtons(event) {
+  if (event.target === $cancel) {
+    $modal.className = 'row hidden';
+  }
+  if (event.target === $confirm) {
+    var entry = data.editing;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (entry === data.entries[i].entryId) {
+        $ul.children[i].remove();
+        data.entries.splice(data.entries[i], 1);
+        entry = null;
+        $modal.className = 'row hidden';
+        swapView('entries');
+        if (data.entries.length === 0) {
+          $noEntriesText.className = 'column-full no-entries';
+        }
+      }
+    }
+  }
+}
+
+$modal.addEventListener('click', handleModalButtons);
+$delete.addEventListener('click', handleDelete);
 document.addEventListener('click', dataView);
 document.addEventListener('DOMContentLoaded', appendDom);
 $photo.addEventListener('input', updateImg);
